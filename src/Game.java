@@ -22,19 +22,25 @@ public class Game {
         player.addCard(shoe.pickCard());
         dealerHand.add(shoe.pickCard());
         player.addCard(shoe.pickCard());
-        dealerHand.add(shoe.pickCard());
+
+        //dealer's second card starts face down
+        Card card = shoe.pickCard();
+        card.setFacedown(true);
+        dealerHand.add(card);
     }
 
     public void paint(Graphics g) throws IOException {
         g.setColor(new Color(35,112,98));
         g.fillRect(0, 0, Main.SIZE_X, Main.SIZE_Y);
 
+        //paint the dealer's hand
         int x = Main.SIZE_X / 2 - 106;
         for (Card card : dealerHand) {
             card.paint(g, x, 10);
             x += 106;
         }
 
+        //paint the player's hand
         x = Main.SIZE_X / 2 - 106;
         for (Card card : player.hand) {
             card.paint(g, x, Main.SIZE_Y - 350);

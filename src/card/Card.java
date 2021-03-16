@@ -26,6 +26,11 @@ public class Card {
      */
     private String suit;
 
+    /**
+     * If the card is facedown
+     */
+    private boolean facedown = false;
+
     private final int SIZE_X = 212;
 
     private final int SIZE_Y = 300;
@@ -52,8 +57,18 @@ public class Card {
         return type + " of " + suit;
     }
 
+    public void setFacedown(Boolean facedown) {
+        this.facedown = facedown;
+    }
+
     public void paint(Graphics g, int positionX, int positionY) throws IOException {
-        BufferedImage image = ImageIO.read(new File("cards\\" + type.toLowerCase() + "_of_" + suit.toLowerCase() + ".png"));
+        BufferedImage image;
+
+        if (facedown) {
+            image = ImageIO.read(new File("cards\\zach.png"));
+        } else {
+            image = ImageIO.read(new File("cards\\" + type.toLowerCase() + "_of_" + suit.toLowerCase() + ".png"));
+        }
         Image scaledImage = image.getScaledInstance(SIZE_X, SIZE_Y, Image.SCALE_DEFAULT);
         g.drawImage(scaledImage, positionX, positionY, null);
     }
