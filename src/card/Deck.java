@@ -8,10 +8,10 @@ public class Deck {
     /**
      * The cards within the deck
      */
-    private ArrayList<Card> deck;
+    private ArrayList<Card> cards;
 
     Deck() {
-        deck = new ArrayList<>();
+        cards = new ArrayList<>();
         resetDeck();
     }
 
@@ -20,22 +20,22 @@ public class Deck {
      */
     public void resetDeck() {
         String[] suits = new String[] {"Clubs", "Diamonds", "Hearts", "Spades"};
-        for (int i = 0; i < suits.length; i++) {
-            Card a = new Card("Ace", 11, suits[i]);
-            deck.add(a);
+        for (String suit : suits) {
+            Card a = new Card("Ace", 11, suit);
+            cards.add(a);
 
             //Add cards 2-10 to the deck
             for (int j = 2; j <= 10; j++) {
-                Card card = new Card(String.valueOf(j), j, suits[i]);
-                deck.add(card);
+                Card card = new Card(String.valueOf(j), j, suit);
+                cards.add(card);
             }
 
-            Card j = new Card("Jack", 10, suits[i]);
-            Card q = new Card("Queen", 10, suits[i]);
-            Card k = new Card("King", 10, suits[i]);
-            deck.add(j);
-            deck.add(q);
-            deck.add(k);
+            Card j = new Card("Jack", 10, suit);
+            Card q = new Card("Queen", 10, suit);
+            Card k = new Card("King", 10, suit);
+            cards.add(j);
+            cards.add(q);
+            cards.add(k);
         }
     }
 
@@ -45,7 +45,7 @@ public class Deck {
      */
     public String toString() {
         String result = "";
-        for (Card card : deck) {
+        for (Card card : cards) {
             result += card + "\n";
         }
         return result;
@@ -56,9 +56,17 @@ public class Deck {
      */
     public Card pickCard() {
         Random rand = new Random();
-        int num = rand.nextInt(deck.size());
-        Card card = deck.get(num);
-        deck.remove(card);
+        int num = rand.nextInt(cards.size());
+        Card card = cards.get(num);
+        cards.remove(num);
         return card;
+    }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
+    public int getNumCards() {
+        return cards.size();
     }
 }
