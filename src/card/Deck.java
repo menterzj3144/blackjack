@@ -3,6 +3,9 @@ package card;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Represents a deck
+ */
 public class Deck {
 
     /**
@@ -10,6 +13,9 @@ public class Deck {
      */
     private ArrayList<Card> cards;
 
+    /**
+     * Creates a new deck
+     */
     Deck() {
         cards = new ArrayList<>();
         resetDeck();
@@ -62,10 +68,18 @@ public class Deck {
         return card;
     }
 
+    /**
+     * Returns true if the deck is empty
+     * @return the isEmpty value of the deck
+     */
     public boolean isEmpty() {
         return cards.isEmpty();
     }
 
+    /**
+     * Returns the number of cards in the deck
+     * @return number of cards in deck
+     */
     public int getNumCards() {
         return cards.size();
     }

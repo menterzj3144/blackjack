@@ -27,11 +27,11 @@ public class MyPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-//        System.out.println(e.getKeyCode() + " " + e.getKeyChar());
+        //System.out.println(e.getKeyCode() + " " + e.getKeyChar());
 
         //left
         if (e.getKeyCode() == 37) {
-            System.out.println("yet");
+            //lower betting interval
         }
         //up
         else if (e.getKeyCode() == 38) {
@@ -39,7 +39,7 @@ public class MyPanel extends JPanel implements KeyListener {
         }
         //right
         else if (e.getKeyCode() == 39) {
-
+            //raise betting interval
         }
         //down
         else if (e.getKeyCode() == 40) {
