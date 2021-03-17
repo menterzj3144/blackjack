@@ -12,9 +12,13 @@ public class Game {
     private Dealer dealer;
     private Player player;
 
+    private boolean isBetting;
+
     Game() {
         shoe = new Shoe(1);
         player = new Player(100);
+        dealer = new Dealer();
+        isBetting = true;
     }
 
     public void raiseBet() {
@@ -101,7 +105,7 @@ public class Game {
 
         //paint the player's hand
         x = Main.SIZE_X / 2 - 106;
-        for (Card card : player.hand) {
+        for (Card card : player.getHand().getCards()) {
             card.paint(g, x, Main.SIZE_Y - 350);
             x += 106;
         }

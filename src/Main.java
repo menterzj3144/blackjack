@@ -18,6 +18,7 @@ public class Main {
         MyPanel panel = new MyPanel(game);
 
         frame.add(panel);
+        frame.addKeyListener(panel);
 
         panel.setVisible(true);
         frame.setVisible(true);
