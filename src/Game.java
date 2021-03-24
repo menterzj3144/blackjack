@@ -63,6 +63,18 @@ public class Game {
         }
     }
 
+    public void raiseInterval() {
+        if (isBetting) {
+            player.raiseInterval();
+        }
+    }
+
+    public void lowerInterval() {
+        if (isBetting) {
+            player.lowerInterval();
+        }
+    }
+
     /**
      * Adds cards to the player's hand
      */
@@ -118,11 +130,12 @@ public class Game {
                         System.out.println("Push");
                         player.addMoney(player.getBet());
                     } else if (playerTotal > dealerTotal) {
-                        if (player.getHand().getCards().size() == 2 && playerTotal == 21) {
-                            
-                        }
                         System.out.println("Win");
-                        player.addMoney(player.getBet() * 2);
+                        if (player.getHand().getCards().size() == 2 && playerTotal == 21) {
+                            player.addMoney(player.getBet() * 2.5);
+                        } else {
+                            player.addMoney(player.getBet() * 2);
+                        }
                     } else {
                         System.out.println("Lose");
                     }

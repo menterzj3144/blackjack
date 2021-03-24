@@ -12,7 +12,12 @@ public class Player extends Gambler {
     /**
      * Amount of money being bet
      */
-    private int bet;
+    private double bet;
+
+    /**
+     * Interval of money being bet
+     */
+    private int interval;
 
     /**
      * Creates a new player
@@ -22,6 +27,7 @@ public class Player extends Gambler {
         super();
         this.money = money;
         bet = 0;
+        interval = 1;
     }
 
     /**
@@ -29,12 +35,12 @@ public class Player extends Gambler {
      */
     public void raiseBet() {
         if (money > 0) {
-            bet += 1;
-            money -= 1;
+            bet += interval;
+            money -= interval;
             System.out.println("Money: $" + money);
             System.out.println("Bet: $" + bet);
         } else {
-            System.out.println("Not enough money");
+            System.err.println("Not enough money");
         }
     }
 
@@ -43,8 +49,8 @@ public class Player extends Gambler {
      */
     public void lowerBet() {
         if (bet > 0) {
-            bet -= 1;
-            money += 1;
+            bet -= interval;
+            money += interval;
             System.out.println("Money: $" + money);
             System.out.println("Bet: $" + bet);
         }
@@ -54,7 +60,7 @@ public class Player extends Gambler {
      * Returns the value of the bet
      * @return int value of bet
      */
-    public int getBet() {
+    public double getBet() {
         return bet;
     }
 
@@ -68,5 +74,23 @@ public class Player extends Gambler {
 
     public void addMoney(double num) {
         money += num;
+    }
+
+    public void raiseInterval() {
+        if (interval < money) {
+            interval += 1;
+            System.out.println("Betting interval: $" + interval);
+        } else {
+            System.err.println("Betting interval cannot be greater than total money");
+        }
+    }
+
+    public void lowerInterval() {
+        if (interval > 1) {
+            interval -= 1;
+            System.out.println("Betting interval: $" + interval);
+        } else {
+            System.err.println("Betting interval cannot be less than 1");
+        }
     }
 }
