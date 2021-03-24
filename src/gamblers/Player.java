@@ -19,6 +19,8 @@ public class Player extends Gambler {
      */
     private int interval;
 
+    private String state;
+
     /**
      * Creates a new player
      * @param money int amount of money the player has
@@ -28,6 +30,7 @@ public class Player extends Gambler {
         this.money = money;
         bet = 0;
         interval = 1;
+        state = "";
     }
 
     /**
@@ -37,8 +40,6 @@ public class Player extends Gambler {
         if (money > 0) {
             bet += interval;
             money -= interval;
-            System.out.println("Money: $" + money);
-            System.out.println("Bet: $" + bet);
 
             if (bet < 50) {
                 interval = 1;
@@ -68,8 +69,6 @@ public class Player extends Gambler {
         if (bet > 0) {
             bet -= interval;
             money += interval;
-            System.out.println("Money: $" + money);
-            System.out.println("Bet: $" + bet);
 
             if (bet <= 50) {
                 interval = 1;
@@ -103,10 +102,21 @@ public class Player extends Gambler {
     public void clearBet() {
         bet = 0;
         interval = 1;
-        System.out.println("$" + money);
     }
 
     public void addMoney(double num) {
         money += num;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setState(String s) {
+        state = s;
+    }
+
+    public String getState() {
+        return state;
     }
 }

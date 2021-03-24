@@ -35,8 +35,8 @@ public class Game {
      * Creates a new game
      */
     Game() {
-        shoe = new Shoe(5);
-        player = new Player(1000000);
+        shoe = new Shoe(2);
+        player = new Player(1000);
         dealer = new Dealer();
         isBetting = true;
     }
@@ -49,6 +49,7 @@ public class Game {
             if (!dealer.getHand().isEmpty()) {
                 player.getHand().clear();
                 dealer.getHand().clear();
+                player.setState("");
             }
             player.raiseBet();
         }
@@ -75,7 +76,6 @@ public class Game {
                 //set isBetting to false and deal cards
                 isBetting = false;
                 deal();
-                System.out.println("Player total: " + player.getHand().getTotal());
 
                 if (player.getHand().getTotal() == 21) {
                     moveOn();
@@ -85,8 +85,7 @@ public class Game {
             //add a card to player's hand if they have not busted
             if (!player.isBust()) {
                 player.hit(shoe.pickCard());
-                System.out.println("Player total: " + player.getHand().getTotal());
-                if (player.isBust()) {
+                if (player.isBust() || player.getHand().getTotal() == 21) {
                     moveOn();
                 }
             }
@@ -99,37 +98,35 @@ public class Game {
     public void moveOn() {
         if (!dealer.getHand().isEmpty()) {
             dealer.getHand().getCards().get(1).setFacedown(false);
-            while (dealer.mustHit()) {
+            while (dealer.mustHit() && player.getHand().getTotal() != 21) {
                 dealer.hit(shoe.pickCard());
             }
 
             int playerTotal = player.getHand().getTotal();
             int dealerTotal = dealer.getHand().getTotal();
 
-            System.out.println("Dealer total: " + dealerTotal);
             if (!player.isBust()) {
                 if (dealer.isBust()) {
-                    //give money
-                    System.out.println("Win");
+                    player.setState("Win");
                     player.addMoney(player.getBet() * 2);
                 } else {
-                    //compare hands
                     if (playerTotal == dealerTotal) {
-                        System.out.println("Push");
+                        player.setState("Push");
                         player.addMoney(player.getBet());
                     } else if (playerTotal > dealerTotal) {
-                        System.out.println("Win");
+                        player.setState("Win");
                         if (player.getHand().getCards().size() == 2 && playerTotal == 21) {
                             player.addMoney(player.getBet() * 2.5);
+                            player.setState("Blackjack");
                         } else {
                             player.addMoney(player.getBet() * 2);
                         }
                     } else {
-                        System.out.println("Lose");
+                        player.setState("Lose");
                     }
                 }
             } else {
-                System.out.println("Lose");
+                player.setState("Lose");
             }
             isBetting = true;
             player.clearBet();
@@ -159,6 +156,7 @@ public class Game {
         g.setColor(new Color(35, 112, 98));
         g.fillRect(0, 0, Main.SIZE_X, Main.SIZE_Y);
 
+
         //paint the dealer's hand
         int x = Main.SIZE_X / 2 - 159;
         for (Card card : dealer.getHand().getCards()) {
@@ -171,6 +169,20 @@ public class Game {
         for (Card card : player.getHand().getCards()) {
             card.paint(g, x, Main.SIZE_Y - 390);
             x += 106;
+        }
+
+
+        Font font = new Font("Sans-serif", Font.PLAIN, 30);
+        g.setColor(new Color(0,0,0));
+        g.setFont(font);
+        g.drawString("Money: $" + player.getMoney() + "0", 10, Main.SIZE_Y - 50);
+        g.drawString("Bet: $" + player.getBet() + "0", 10, Main.SIZE_Y - 80);
+        g.drawString(player.getState(), 100, Main.SIZE_Y / 2);
+        if (player.getHand().getTotal() > 0) {
+            g.drawString(String.valueOf(player.getHand().getTotal()), Main.SIZE_X - 100, Main.SIZE_Y - 50);
+        }
+        if (!dealer.getHand().isEmpty() && !dealer.getHand().getCards().get(1).getFacedown()) {
+            g.drawString(String.valueOf(dealer.getHand().getTotal()), Main.SIZE_X - 100, 40);
         }
     }
 }

@@ -82,6 +82,10 @@ public class Card {
         this.facedown = facedown;
     }
 
+    public boolean getFacedown() {
+        return facedown;
+    }
+
     /**
      * Paints the card to the screen
      * @param g
