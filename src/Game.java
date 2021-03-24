@@ -76,6 +76,10 @@ public class Game {
                 isBetting = false;
                 deal();
                 System.out.println("Player total: " + player.getHand().getTotal());
+
+                if (player.getHand().getTotal() == 21) {
+                    moveOn();
+                }
             }
         } else {
             //add a card to player's hand if they have not busted
@@ -83,7 +87,6 @@ public class Game {
                 player.hit(shoe.pickCard());
                 System.out.println("Player total: " + player.getHand().getTotal());
                 if (player.isBust()) {
-                    System.out.println("You suck");
                     moveOn();
                 }
             }
@@ -99,17 +102,33 @@ public class Game {
             while (dealer.mustHit()) {
                 dealer.hit(shoe.pickCard());
             }
-            System.out.println("Dealer total: " + dealer.getHand().getTotal());
+
+            int playerTotal = player.getHand().getTotal();
+            int dealerTotal = dealer.getHand().getTotal();
+
+            System.out.println("Dealer total: " + dealerTotal);
             if (!player.isBust()) {
                 if (dealer.isBust()) {
                     //give money
+                    System.out.println("Win");
+                    player.addMoney(player.getBet() * 2);
                 } else {
                     //compare hands
+                    if (playerTotal == dealerTotal) {
+                        System.out.println("Push");
+                        player.addMoney(player.getBet());
+                    } else if (playerTotal > dealerTotal) {
+                        if (player.getHand().getCards().size() == 2 && playerTotal == 21) {
+                            
+                        }
+                        System.out.println("Win");
+                        player.addMoney(player.getBet() * 2);
+                    } else {
+                        System.out.println("Lose");
+                    }
                 }
-            }
-            //player busts
-            else {
-
+            } else {
+                System.out.println("Lose");
             }
             isBetting = true;
             player.clearBet();
