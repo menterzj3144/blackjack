@@ -32,7 +32,6 @@ public class MyPanel extends JPanel implements KeyListener {
         //left
         if (e.getKeyCode() == 37) {
             //lower betting interval
-            game.lowerInterval();
         }
         //up
         else if (e.getKeyCode() == 38) {
@@ -41,7 +40,6 @@ public class MyPanel extends JPanel implements KeyListener {
         //right
         else if (e.getKeyCode() == 39) {
             //raise betting interval
-            game.raiseInterval();
         }
         //down
         else if (e.getKeyCode() == 40) {

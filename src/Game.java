@@ -36,7 +36,7 @@ public class Game {
      */
     Game() {
         shoe = new Shoe(5);
-        player = new Player(100);
+        player = new Player(1000000);
         dealer = new Dealer();
         isBetting = true;
     }
@@ -60,18 +60,6 @@ public class Game {
     public void lowerBet() {
         if (isBetting) {
             player.lowerBet();
-        }
-    }
-
-    public void raiseInterval() {
-        if (isBetting) {
-            player.raiseInterval();
-        }
-    }
-
-    public void lowerInterval() {
-        if (isBetting) {
-            player.lowerInterval();
         }
     }
 
