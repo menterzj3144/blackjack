@@ -102,6 +102,7 @@ public class Player extends Gambler {
      */
     public void clearBet() {
         bet = 0;
+        interval = 1;
         System.out.println("$" + money);
     }
 
