@@ -64,6 +64,14 @@ public class Game {
         }
     }
 
+    public void raiseInterval() {
+        player.raiseInterval();
+    }
+
+    public void lowerInterval() {
+        player.lowerInterval();
+    }
+
     /**
      * Adds cards to the player's hand
      */
@@ -160,29 +168,31 @@ public class Game {
         //paint the dealer's hand
         int x = Main.SIZE_X / 2 - 159;
         for (Card card : dealer.getHand().getCards()) {
-            card.paint(g, x, 40);
+            card.paint(g, x, 10);
             x += 106;
         }
 
         //paint the player's hand
         x = Main.SIZE_X / 2 - 159;
         for (Card card : player.getHand().getCards()) {
-            card.paint(g, x, Main.SIZE_Y - 390);
+            card.paint(g, x, Main.SIZE_Y - 350);
             x += 106;
         }
 
 
-        Font font = new Font("Sans-serif", Font.PLAIN, 30);
         g.setColor(new Color(0,0,0));
-        g.setFont(font);
+        g.setFont(new Font("Sans-serif", Font.PLAIN, 30));
         g.drawString("Money: $" + player.getMoney() + "0", 10, Main.SIZE_Y - 50);
         g.drawString("Bet: $" + player.getBet() + "0", 10, Main.SIZE_Y - 80);
-        g.drawString(player.getState(), 100, Main.SIZE_Y / 2);
+        g.drawString("Chip: $" + player.getBettingInterval() + "0", 10, Main.SIZE_Y - 110);
         if (player.getHand().getTotal() > 0) {
             g.drawString(String.valueOf(player.getHand().getTotal()), Main.SIZE_X - 100, Main.SIZE_Y - 50);
         }
         if (!dealer.getHand().isEmpty() && !dealer.getHand().getCards().get(1).getFacedown()) {
             g.drawString(String.valueOf(dealer.getHand().getTotal()), Main.SIZE_X - 100, 40);
         }
+
+        g.setFont(new Font("Sans-serif", Font.ITALIC, 50));
+        g.drawString(player.getState(), 100, Main.SIZE_Y / 2 - 15);
     }
 }
