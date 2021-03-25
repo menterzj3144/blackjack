@@ -64,10 +64,16 @@ public class Game {
         }
     }
 
+    /**
+     * Raises the betting interval
+     */
     public void raiseInterval() {
         player.raiseInterval();
     }
 
+    /**
+     * Lowers the betting interval
+     */
     public void lowerInterval() {
         player.lowerInterval();
     }

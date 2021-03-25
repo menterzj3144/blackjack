@@ -74,8 +74,6 @@ public class Hand {
      * @return true if player's hand is empty
      */
     public boolean isEmpty() {
-
         return ! (cards.size() > 1);
-
     }
 }

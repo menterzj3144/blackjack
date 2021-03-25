@@ -19,7 +19,9 @@ public class Player extends Gambler {
      */
     private int interval;
 
+
     private double[] intervalList;
+
 
     private String state;
 
@@ -64,12 +66,18 @@ public class Player extends Gambler {
         }
     }
 
+    /**
+     * Raises the betting interval
+     */
     public void raiseInterval() {
         if (interval < intervalList.length - 1) {
             interval++;
         }
     }
 
+    /**
+     * Lowers the betting interval
+     */
     public void lowerInterval() {
         if (interval > 0) {
             interval--;
@@ -91,22 +99,42 @@ public class Player extends Gambler {
         bet = 0;
     }
 
+    /**
+     * 
+     * @param num
+     */
     public void addMoney(double num) {
         money += num;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getMoney() {
         return money;
     }
 
+    /**
+     *
+     * @param s
+     */
     public void setState(String s) {
         state = s;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getBettingInterval() {
         return intervalList[interval];
     }
