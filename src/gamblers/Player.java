@@ -92,6 +92,11 @@ public class Player extends Gambler {
         return bet;
     }
 
+    public void doubleBet() {
+        money -= bet;
+        bet = bet * 2;
+    }
+
     /**
      * Sets the bet value to zero
      */

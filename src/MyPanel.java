@@ -51,6 +51,10 @@ public class MyPanel extends JPanel implements KeyListener {
         else if (e.getKeyCode() == 10) {
             game.moveOn();
         }
+        //control
+        else if (e.getKeyCode() == 17) {
+            game.doubleBet();
+        }
     }
 
     @Override

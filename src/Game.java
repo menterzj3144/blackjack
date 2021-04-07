@@ -91,6 +91,7 @@ public class Game {
                 isBetting = false;
                 deal();
 
+                //if player is dealt a blackjack
                 if (player.getHand().getTotal() == 21) {
                     moveOn();
                 }
@@ -159,6 +160,21 @@ public class Game {
         Card card = shoe.pickCard();
         card.setFacedown(true);
         dealer.hit(card);
+    }
+
+    /**
+     * Doubles the player's bet if they have enough money and if they have two cards
+     */
+    public void doubleBet() {
+        if (player.getHand().getCards().size() == 2) {
+            if (player.getBet() <= player.getMoney()) {
+                player.doubleBet();
+                player.hit(shoe.pickCard());
+                moveOn();
+            } else {
+                System.err.println("Not enough funds.");
+            }
+        }
     }
 
     /**
