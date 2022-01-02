@@ -45,7 +45,7 @@ public class Hand {
                     total -= 10;
 
                     if (total <= 21) {
-                        return total;
+                        break;
                     }
                 }
             }

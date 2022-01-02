@@ -27,19 +27,19 @@ public class MyPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //left
+        //left arrow
         if (e.getKeyCode() == 37) {
             game.lowerInterval();
         }
-        //up
+        //up arrow
         else if (e.getKeyCode() == 38) {
             game.raiseBet();
         }
-        //right
+        //right arrow
         else if (e.getKeyCode() == 39) {
             game.raiseInterval();
         }
-        //down
+        //down arrow
         else if (e.getKeyCode() == 40) {
             game.lowerBet();
         }
@@ -49,9 +49,9 @@ public class MyPanel extends JPanel implements KeyListener {
         }
         //enter
         else if (e.getKeyCode() == 10) {
-            game.moveOn();
+            game.finishHand();
         }
-        //control
+        //left control
         else if (e.getKeyCode() == 17) {
             game.doubleBet();
         }

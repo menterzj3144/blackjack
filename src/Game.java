@@ -14,17 +14,17 @@ public class Game {
     /**
      * The shoe of cards in the game
      */
-    private Shoe shoe;
+    private final Shoe shoe;
 
     /**
      * The dealer of the game
      */
-    private Dealer dealer;
+    private final Dealer dealer;
 
     /**
      * The player of the game
      */
-    private Player player;
+    private final Player player;
 
     /**
      * If the player is betting or not
@@ -68,14 +68,18 @@ public class Game {
      * Raises the betting interval
      */
     public void raiseInterval() {
-        player.raiseInterval();
+        if (isBetting) {
+            player.raiseInterval();
+        }
     }
 
     /**
      * Lowers the betting interval
      */
     public void lowerInterval() {
-        player.lowerInterval();
+        if (isBetting) {
+            player.lowerInterval();
+        }
     }
 
     /**
@@ -85,7 +89,7 @@ public class Game {
         if (isBetting) {
             //player cannot bet zero
             if (player.getBet() == 0) {
-                System.err.println("Ya gotta bet bitch");
+                System.err.println("You need to bet.");
             } else {
                 //set isBetting to false and deal cards
                 isBetting = false;
@@ -93,7 +97,7 @@ public class Game {
 
                 //if player is dealt a blackjack
                 if (player.getHand().getTotal() == 21) {
-                    moveOn();
+                    finishHand();
                 }
             }
         } else {
@@ -101,7 +105,7 @@ public class Game {
             if (!player.isBust()) {
                 player.hit(shoe.pickCard());
                 if (player.isBust() || player.getHand().getTotal() == 21) {
-                    moveOn();
+                    finishHand();
                 }
             }
         }
@@ -110,7 +114,7 @@ public class Game {
     /**
      * Checks player and dealer totals, finds out who won
      */
-    public void moveOn() {
+    public void finishHand() {
         if (!dealer.getHand().isEmpty()) {
             dealer.getHand().getCards().get(1).setFacedown(false);
             while (dealer.mustHit() && player.getHand().getTotal() != 21) {
@@ -129,11 +133,11 @@ public class Game {
                         player.setState("Push");
                         player.addMoney(player.getBet());
                     } else if (playerTotal > dealerTotal) {
-                        player.setState("Win");
                         if (player.getHand().getCards().size() == 2 && playerTotal == 21) {
-                            player.addMoney(player.getBet() * 2.5);
                             player.setState("Blackjack");
+                            player.addMoney(player.getBet() * 2.5);
                         } else {
+                            player.setState("Win");
                             player.addMoney(player.getBet() * 2);
                         }
                     } else {
@@ -167,10 +171,9 @@ public class Game {
      */
     public void doubleBet() {
         if (player.getHand().getCards().size() == 2) {
-            if (player.getBet() <= player.getMoney()) {
-                player.doubleBet();
+            if (player.doubleBet()) {
                 player.hit(shoe.pickCard());
-                moveOn();
+                finishHand();
             } else {
                 System.err.println("Not enough funds.");
             }

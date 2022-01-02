@@ -92,9 +92,18 @@ public class Player extends Gambler {
         return bet;
     }
 
-    public void doubleBet() {
-        money -= bet;
-        bet = bet * 2;
+    /**
+     * Doubles the player's bet if they have enough money
+     * @return true if can double bet, false if not
+     */
+    public boolean doubleBet() {
+        if (bet <= money) {
+            bet = bet * 2;
+            money -= bet;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -105,40 +114,40 @@ public class Player extends Gambler {
     }
 
     /**
-     * 
-     * @param num
+     * Adds money to the player
+     * @param num the amount to add
      */
     public void addMoney(double num) {
         money += num;
     }
 
     /**
-     *
-     * @return
+     * Returns the amount of money the player has
+     * @return the money the player has
      */
     public double getMoney() {
         return money;
     }
 
     /**
-     *
-     * @param s
+     * Sets state of the hand
+     * @param s the state to be set
      */
     public void setState(String s) {
         state = s;
     }
 
     /**
-     *
-     * @return
+     * Returns state of the hand
+     * @return state
      */
     public String getState() {
         return state;
     }
 
     /**
-     *
-     * @return
+     * Returns the betting interval
+     * @return betting interval
      */
     public double getBettingInterval() {
         return intervalList[interval];

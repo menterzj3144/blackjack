@@ -97,7 +97,7 @@ public class Card {
        BufferedImage image;
 
         if (facedown) {
-            image = ImageIO.read(new File("cards\\zach.png"));
+            image = ImageIO.read(new File("cards\\back_of_card.png"));
         } else {
             image = ImageIO.read(new File("cards\\" + type.toLowerCase() + "_of_" + suit.toLowerCase() + ".png"));
         }

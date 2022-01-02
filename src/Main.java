@@ -2,7 +2,7 @@ import javax.swing.*;
 
 /**
  * Zachary Menter and Toby Moszer
- * Last Updated: 3/24/2021
+ * Last Updated: 1/2/2022
  */
 public class Main {
 
@@ -16,7 +16,7 @@ public class Main {
 
         Game game = new Game();
 
-        JFrame frame = new JFrame("yeet time");
+        JFrame frame = new JFrame("Blackjack");
 
         frame.setSize(SIZE_X, SIZE_Y);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
